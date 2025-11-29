@@ -1,75 +1,8 @@
-/* Alert */
-.alert {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
+/* =========================
+   GOOGLE FONT & RESET
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-.alert-error {
-  background: rgba(185, 28, 28, 0.2);
-  border: 1px solid rgba(185, 28, 28, 0.3);
-  color: #fecdd3;
-}
-
-.alert-success {
-  background: rgba(16, 185, 129, 0.2);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #dcfce7;
-}
-
-.alert i {
-  font-size: 1.3rem;
-  margin-top: 2px;
-}
-
-.alert h4 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 4px;
-  color: #ffffff;
-}
-
-.alert p {
-  font-size: 0.95rem;
-  font-weight: 300;
-}
-
-.alert-detail {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  margin-top: 6px;
-}
-
-/* Tombol link unduh */
-.btn-download-link {
-  display: inline-block;
-  width: 100%;
-  padding: 14px;
-  background: #10b981;
-  color: #ffffff;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-}
-
-.btn-download-link:hover {
-  background: #059669;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-}
-
-/* Hapus semua kode lain yang berkaitan dengan .btn-raw-data, .raw-data-container, .raw-data */
-/* Reset dasar untuk konsistensi antar browser */
 * {
   margin: 0;
   padding: 0;
@@ -77,10 +10,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* Import font modern dari Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-/* Latar belakang halaman */
+/* =========================
+   BODY
+========================= */
 body {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   color: #f8f9fa;
@@ -91,7 +23,6 @@ body {
   line-height: 1.6;
 }
 
-/* Container untuk membatasi lebar konten */
 .container {
   width: 100%;
   max-width: 600px;
@@ -99,26 +30,48 @@ body {
   padding: 0 20px;
 }
 
-/* ------------------------------ HEADER ------------------------------ */
+/* =========================
+      HEADER + LOGO
+========================= */
 .app-header {
   text-align: center;
   margin: 30px 0 50px;
   padding-top: 10px;
 }
 
+/* FOTO PROFIL BULAT */
+.profile-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  transition: .3s ease;
+}
+.profile-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+}
+.profile-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .app-title {
   font-size: 2.4rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 15px;
 }
 
 .app-title .fab.fa-tiktok {
   font-size: 2.8rem;
-  color: #ffffff;
   animation: pulse 2.5s infinite ease-in-out;
 }
 
@@ -129,33 +82,31 @@ body {
   margin-top: 10px;
 }
 
-/* ------------------------------ KONTEN UTAMA ------------------------------ */
+/* =========================
+         CARD UTAMA
+========================= */
 .app-container {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
+  align-items: center;
 }
 
-/* Card utama untuk form unduh */
 .download-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 35px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, .1);
   width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
 }
 
 .card-title {
   font-size: 1.6rem;
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 30px;
   text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
   position: relative;
 }
 
@@ -171,26 +122,24 @@ body {
   transform: translateX(-50%);
 }
 
-/* Form input link */
+/* =========================
+         INPUT FORM
+========================= */
 .download-form {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-.form-group {
-  width: 100%;
-}
-
 .input-wrapper {
   position: relative;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, .15);
   border-radius: 12px;
   padding: 0 20px;
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: .3s ease;
 }
 
 .input-wrapper:focus-within {
@@ -199,8 +148,8 @@ body {
 }
 
 .input-icon {
-  color: #aed6f1;
   font-size: 1.2rem;
+  color: #aed6f1;
   margin-right: 15px;
 }
 
@@ -210,155 +159,130 @@ body {
   background: transparent;
   border: none;
   outline: none;
-  color: #f8f9fa;
+  color: #fff;
   font-size: 1.05rem;
-  font-weight: 300;
 }
 
 #url::placeholder {
   color: #aed6f1;
-  opacity: 0.8;
 }
 
-/* Tombol submit */
+/* =========================
+        BUTTON SUBMIT
+========================= */
 .button-group {
   display: flex;
   justify-content: center;
 }
 
-.btn-download {
-  padding: 16px 40px;
+.btn-download,
+.btn-download-link {
+  padding: 16px;
   background: #10b981;
-  color: #ffffff;
+  color: #fff;
   border: none;
   border-radius: 12px;
   font-size: 1.15rem;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
   width: 100%;
   max-width: 350px;
-  text-transform: uppercase;
+  text-align: center;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: .3s ease;
 }
 
-.btn-download:hover {
+.btn-download:hover,
+.btn-download-link:hover {
   background: #059669;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
 }
 
-.btn-download:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
-}
-
-.btn-download .fas.fa-download {
-  font-size: 1.3rem;
-}
-
-/* ------------------------------ STATUS & HASIL ------------------------------ */
-.result {
-  margin-top: 35px;
-  padding-top: 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
+/* =========================
+      STATUS INDICATOR
+========================= */
 .status-indicator {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 1rem;
   color: #aed6f1;
-  transition: all 0.3s ease;
+  margin-top: 20px;
 }
 
 .status-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,.08);
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: #aed6f1;
-  transition: all 0.3s ease;
+  align-items: center;
+  transition: .3s ease;
 }
 
-/* Gaya status berbeda */
+/* STATUS WARNA */
 .status-indicator.idle .status-icon {
-  background: rgba(174, 214, 241, 0.2);
+  background: rgba(174,214,241,.2);
   color: #aed6f1;
 }
-
 .status-indicator.loading .status-icon {
-  background: rgba(37, 99, 235, 0.2);
+  background: rgba(37,99,235,.2);
   color: #3b82f6;
   animation: spin 1.5s linear infinite;
 }
-
 .status-indicator.success .status-icon {
-  background: rgba(16, 185, 129, 0.2);
+  background: rgba(16,185,129,.2);
   color: #10b981;
 }
-
 .status-indicator.error .status-icon {
-  background: rgba(239, 68, 68, 0.2);
+  background: rgba(239,68,68,.2);
   color: #ef4444;
 }
 
 .status-text {
-  transition: color 0.3s ease;
+  transition: .3s ease;
 }
 
-.status-indicator.success .status-text {
-  color: #10b981;
-  font-weight: 400;
-}
-
-.status-indicator.error .status-text {
-  color: #ef4444;
-  font-weight: 400;
-}
-
-/* Alert pesan sukses/error */
+/* =========================
+           ALERT
+========================= */
 .alert {
   display: flex;
-  align-items: flex-start;
   gap: 15px;
   padding: 20px;
   border-radius: 12px;
-  margin-bottom: 25px;
+  margin: 25px 0;
   border: 1px solid transparent;
 }
 
 .alert-error {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, .15);
+  border-color: rgba(239, 68, 68, .3);
   color: #fecdd3;
 }
 
 .alert-success {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, .15);
+  border-color: rgba(16, 185, 129, .3);
   color: #dcfce7;
 }
 
 .alert i {
   font-size: 1.5rem;
   margin-top: 2px;
-  flex-shrink: 0;
 }
 
 .alert h4 {
+  color: #fff;
   font-size: 1.2rem;
-  font-weight: 500;
   margin-bottom: 6px;
-  color: #ffffff;
 }
 
 .alert p {
@@ -367,65 +291,28 @@ body {
 }
 
 .alert-detail {
-  font-size: 0.9rem;
+  font-size: .9rem;
   color: #aed6f1;
-  margin-top: 8px;
 }
 
-/* Tombol link unduh */
-.btn-download-link {
-  display: inline-block;
-  width: 100%;
-  padding: 16px;
-  background: #10b981;
-  color: #ffffff;
-  border-radius: 12px;
-  font-size: 1.15rem;
-  font-weight: 500;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.btn-download-link:hover {
-  background: #059669;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
-}
-
-/* ------------------------------ FOOTER ------------------------------ */
+/* =========================
+          FOOTER
+========================= */
 .app-footer {
   text-align: center;
-  margin-top: auto;
   padding: 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255,255,255,.1);
+  margin-top: auto;
 }
 
 .footer-text {
-  font-size: 0.9rem;
+  font-size: .9rem;
   color: #aed6f1;
-  font-weight: 300;
 }
 
-/* ------------------------------ KELAS BANTU ------------------------------ */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-/* ------------------------------ ANIMASI ------------------------------ */
+/* =========================
+         ANIMASI
+========================= */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.15); }
@@ -433,93 +320,18 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
+  0% { transform: rotate(0); }
   100% { transform: rotate(360deg); }
 }
 
-/* ------------------------------ RESPONSIF ------------------------------ */
+/* =========================
+        RESPONSIVE
+========================= */
 @media (max-width: 576px) {
-  .app-title {
-    font-size: 2rem;
-  }
-
-  .app-title .fab.fa-tiktok {
-    font-size: 2.4rem;
-  }
-
-  .app-tagline {
-    font-size: 1rem;
-  }
-
-  .download-card {
-    padding: 25px;
-  }
-
-  .card-title {
-    font-size: 1.4rem;
-  }
-
-  #url {
-    font-size: 1rem;
-  }
-
-  .btn-download,
-  .btn-download-link {
-    font-size: 1rem;
-    padding: 14px;
-  }
-
-  .alert h4 {
-    font-size: 1.1rem;
-  }
-
-  .alert p {
-    font-size: 0.95rem;
-  }
-
-  .status-indicator {
-    font-size: 0.95rem;
-  }
+  .app-title { font-size: 2rem; }
+  .app-title .fab.fa-tiktok { font-size: 2.4rem; }
+  .app-tagline { font-size: 1rem; }
+  .download-card { padding: 25px; }
+  .card-title { font-size: 1.4rem; }
+  .btn-download { font-size: 1rem; padding: 14px; }
 }
-/* ------------------------------ HEADER ------------------------------ */
-.app-header {
-  text-align: center;
-  margin: 30px 0 50px;
-  padding-top: 10px;
-}
-
-/* STYLING LOGO PROFIL */
-.profile-logo {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid #10b981; /* Garis pinggir logo dengan warna utama */
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); /* Efek cahaya di sekitar logo */
-  transition: all 0.3s ease;
-}
-
-.profile-logo:hover {
-  transform: scale(1.05); /* Efek zoom saat hover */
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
-}
-
-.profile-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Agar gambar tidak terdistorsi */
-}
-
-.app-title {
-  font-size: 2.4rem;
-  font-weight: 600;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-/* ... sisanya kode CSS tetap sama ... */
-  
