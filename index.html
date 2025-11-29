@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>TikTok Downloader - Cepat & Mudah</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- STYLE -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
+  <!-- HEADER -->
   <header class="app-header">
     <div class="container">
-      <!-- TAMBAHKAN LOGO PROFIL DI SINI -->
+
+      <!-- LOGO PROFIL -->
       <div class="profile-logo">
-  <img 
-    src="https://i.ibb.co.com/7tdvSy1s/IMG-20251129-164442-470.png.pg" 
-    alt="Logo Profil TikTok Downloader" 
-    loading="lazy" <!-- Agar gambar dimuat secara lambat untuk performa lebih baik -->
-  
+        <img
+          src="https://i.ibb.co.com/7tdvSy1s/IMG-20251129-164442-470.png"
+          alt="Logo Profil TikTok Downloader"
+          loading="lazy"
+        />
       </div>
-      
+
       <h1 class="app-title">
         <i class="fab fa-tiktok"></i> TikTok Downloader
       </h1>
@@ -26,53 +36,57 @@
     </div>
   </header>
 
+  <!-- MAIN -->
   <main class="container app-container">
     <div class="download-card">
       <h2 class="card-title">Mulai Unduh</h2>
-      
+
+      <!-- FORM INPUT -->
       <form id="download-form" class="download-form">
         <div class="form-group">
           <label for="url" class="sr-only">Link TikTok</label>
+
           <div class="input-wrapper">
             <i class="fas fa-link input-icon"></i>
-            <input 
-              id="url" 
-              type="url" 
-              placeholder="Tempel link TikTok di sini (contoh: https://vt.tiktok.com/...)" 
-              required 
-              aria-required="true"
-              aria-label="Link TikTok yang akan diunduh"
-            />
+            <input id="url" type="url"
+              placeholder="Tempel link TikTok di sini (contoh: https://vt.tiktok.com/...)"
+              required aria-required="true" aria-label="Link TikTok yang akan diunduh" />
           </div>
         </div>
 
         <div class="button-group">
-          <button 
-            id="btn" 
-            type="submit" 
-            class="btn-download"
-            aria-label="Klik untuk mulai mengunduh video"
-          >
+          <button id="btn" type="submit" class="btn-download"
+            aria-label="Klik untuk mulai mengunduh video">
             <i class="fas fa-download"></i> Unduh Sekarang
           </button>
         </div>
       </form>
 
-      <div class="result" id="result">
-        <div class="status-indicator">
-          <span class="status-icon"><i class="fas fa-clock"></i></span>
-          <span class="status-text" id="statusText">Menunggu link TikTok...</span>
-        </div>
+      <!-- LOADER -->
+      <div class="loader" id="loader" style="display:none;"></div>
+
+      <!-- STATUS -->
+      <div class="status-indicator">
+        <span class="status-icon"><i class="fas fa-clock"></i></span>
+        <span class="status-text" id="statusText">Menunggu link TikTok...</span>
       </div>
+
+      <!-- RESULT -->
+      <div id="result"></div>
+
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="app-footer">
     <div class="container">
       <p class="footer-text">©DIN-2025</p>
     </div>
   </footer>
 
+  <!-- SCRIPT -->
   <script src="script.js"></script>
+
 </body>
+
 </html>
