@@ -141,7 +141,7 @@ async function handleDownload(e) {
   }
 
   try {
-    setStatus("Menghubungi API...", "loading");
+    setStatus("Loading...", "loading");
     loader.style.display = "block";
 
     const apiUrl = `${API_BASE}?url=${encodeURIComponent(rawUrl)}&apikey=${API_KEY}`;
