@@ -176,7 +176,8 @@ body {
 }
 
 .btn-download,
-.btn-download-link {
+.btn-primary,
+.btn-secondary {
   padding: 16px;
   background: #10b981;
   color: #fff;
@@ -198,7 +199,8 @@ body {
 }
 
 .btn-download:hover,
-.btn-download-link:hover {
+.btn-primary:hover,
+.btn-secondary:hover {
   background: #059669;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
@@ -311,7 +313,7 @@ body {
 }
 
 /* =========================
-         ANIMASI
+        ANIMASI
 ========================= */
 @keyframes pulse {
   0% { transform: scale(1); }
@@ -325,6 +327,19 @@ body {
 }
 
 /* =========================
+        LOADER FIX
+========================= */
+.loader {
+  margin: 20px auto;
+  width: 45px;
+  height: 45px;
+  border: 5px solid rgba(255,255,255,0.2);
+  border-top-color: #00eaff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+/* =========================
         RESPONSIVE
 ========================= */
 @media (max-width: 576px) {
@@ -334,4 +349,94 @@ body {
   .download-card { padding: 25px; }
   .card-title { font-size: 1.4rem; }
   .btn-download { font-size: 1rem; padding: 14px; }
+}
+
+/* ============= RESULT CARD ============= */
+.result-card {
+  margin-top: 30px;
+  padding: 25px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  animation: fadeIn 0.4s ease;
+}
+
+.result-card h3 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+/* Thumbnail */
+.thumb {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.4);
+  transition: .3s ease;
+}
+
+.thumb:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0,255,200,0.4);
+}
+
+/* Buttons container */
+.download-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* BUTTON VIDEO / AUDIO */
+.btn-primary,
+.btn-secondary {
+  padding: 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  transition: 0.3s;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Video Button */
+.btn-primary {
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  box-shadow: 0 0 15px rgba(59,130,246,0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(59,130,246,0.6);
+}
+
+/* Audio Button */
+.btn-secondary {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  box-shadow: 0 0 15px rgba(16,185,129,0.4);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(16,185,129,0.6);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
