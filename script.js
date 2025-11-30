@@ -1,188 +1,114 @@
-// Ambil elemen dari HTML
-const urlInput = document.getElementById('url');
-const result = document.getElementById('result');
-const statusText = document.getElementById('statusText');
-const statusIndicator = document.querySelector('.status-indicator');
-const downloadForm = document.getElementById('download-form');
-const loader = document.getElementById('loader');
+// Ambil elemen
+const form = document.getElementById("download-form");
+const loader = document.getElementById("loader");
+const statusText = document.getElementById("statusText");
+const result = document.getElementById("result");
 
-// API config
-const API_BASE = 'https://api.yydz.biz.id/api/download/tiktok';
-const API_KEY = 'kZNc2Nu';
+// === 3 API GRATIS ===
+const API_LIST = [
+  (u) => `https://www.tikwm.com/api/?url=${encodeURIComponent(u)}`,
+  (u) => `https://api.douyin.wtf/api?url=${encodeURIComponent(u)}`,
+  (u) => `https://api.tiklydown.eu.org/api/download?url=${encodeURIComponent(u)}`
+];
 
-/* ===============================
-   Fungsi Status
-================================*/
-function setStatus(text, type = 'idle') {
-  statusText.textContent = text;
-
-  statusIndicator.classList.remove('idle', 'loading', 'success', 'error');
-  statusIndicator.classList.add(type);
-
-  const iconMap = {
-    idle: 'fas fa-clock',
-    loading: 'fas fa-spinner fa-spin',
-    success: 'fas fa-check',
-    error: 'fas fa-exclamation-circle'
-  };
-
-  const statusIcon = statusIndicator.querySelector('.status-icon i');
-  statusIcon.className = iconMap[type] || 'fas fa-clock';
-}
-
-/* ===============================
-   Safe Text
-================================*/
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function escapeHtmlAttr(str) {
-  return String(str)
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/&/g, '&amp;');
-}
-
-/* ===============================
-   Error & Success UI
-================================*/
-function showError(message, detail = '') {
-  loader.style.display = "none";
-
-  result.innerHTML = `
-    <div class="alert alert-error">
-      <i class="fas fa-exclamation-circle"></i>
-      <div>
-        <h4>Gagal!</h4>
-        <p>${escapeHtml(message)}</p>
-        ${detail ? `<p class="alert-detail">${escapeHtml(detail)}</p>` : ''}
-      </div>
-    </div>
-  `;
-}
-
-function showVideoLink(url) {
-  loader.style.display = "none";
-
-  result.innerHTML = `
-    <div class="alert alert-success">
-      <i class="fas fa-check-circle"></i>
-      <div>
-        <h4>Berhasil!</h4>
-        <p>Klik tombol di bawah untuk mengunduh video.</p>
-      </div>
-    </div>
-    <a 
-      class="btn btn-download-link" 
-      href="${escapeHtmlAttr(url)}" 
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <i class="fas fa-download"></i> Unduh Video Sekarang
-    </a>
-  `;
-
-  setStatus("Selesai", "success");
-}
-
-/* ===============================
-   Cari URL video otomatis
-================================*/
-function findFirstUrlInObject(obj) {
-  if (!obj || typeof obj !== 'object') return null;
-
-  if (Array.isArray(obj)) {
-    for (const v of obj) {
-      const found = findFirstUrlInObject(v);
-      if (found) return found;
+// === Fallback API ===
+async function fetchFromAPIs(url) {
+  for (let api of API_LIST) {
+    try {
+      const endpoint = api(url);
+      const res = await fetch(endpoint);
+      const json = await res.json();
+      
+      console.log("✔ Sukses dari:", endpoint);
+      return json;
+    } catch (err) {
+      console.log("✘ Gagal:", api(url));
     }
   }
-
-  for (const [key, val] of Object.entries(obj)) {
-    if (typeof val === 'string' && val.startsWith("http")) return val;
-    if (typeof val === 'object') {
-      const found = findFirstUrlInObject(val);
-      if (found) return found;
-    }
-  }
-
   return null;
 }
 
-/* ===============================
-   Handler DOWNLOAD
-================================*/
-async function handleDownload(e) {
+// === Submit ===
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-
-  const rawUrl = urlInput.value.trim();
-  result.innerHTML = "";
-
+  
+  const url = document.getElementById("url").value.trim();
+  if (!url) return alert("Masukkan URL TikTok terlebih dahulu!");
+  
   // Reset UI
-  setStatus("Memeriksa link...", "idle");
+  result.innerHTML = "";
+  loader.style.display = "block";
+  statusText.innerHTML = "⏳ Mengambil data...";
+  
+  const data = await fetchFromAPIs(url);
   loader.style.display = "none";
-
-  if (!rawUrl) {
-    showError("Masukkan link TikTok terlebih dahulu!");
-    setStatus("Error", "error");
+  
+  if (!data) {
+    statusText.innerHTML = "❌ Semua API gagal!";
     return;
   }
-
-  if (!/tiktok\.com|vt\.tiktok\.com|vm\.tiktok\.com/i.test(rawUrl)) {
-    showError("Link bukan dari TikTok!", "Contoh: https://vt.tiktok.com/...");
-    setStatus("Link tidak valid", "error");
+  
+  let title, video, audio, thumb;
+  
+  // ========================
+  //   PARSER API TIKWM
+  // ========================
+  if (data.data && data.data.play) {
+    const d = data.data;
+    title = d.title;
+    video = d.play;
+    audio = d.music;
+    thumb = d.cover;
+  }
+  
+  // ========================
+  //   PARSER API DOUYIN.WTF
+  // ========================
+  else if (data.aweme && data.aweme.detail) {
+    const d = data.aweme.detail;
+    title = d.desc;
+    video = d.video.play_addr.url_list[0];
+    audio = d.music.play_url.url_list[0];
+    thumb = d.video.cover.url_list[0];
+  }
+  
+  // ========================
+  //   PARSER API TIKLYDOWN
+  // ========================
+  else if (data.result || data.video) {
+    const d = data.result || data;
+    title = d.title;
+    video = d.video;
+    audio = d.music;
+    thumb = d.cover || d.thumbnail;
+  }
+  
+  // Jika gagal parsing
+  if (!video) {
+    statusText.innerHTML = "❌ Format API tidak dikenali.";
     return;
   }
+  
+  statusText.innerHTML = "✅ Berhasil diambil!";
+  
+  // ========================
+  //   OUTPUT HASIL
+  // ========================
+  result.innerHTML = `
+    <div class="result-card">
+      <h3>${title || "Tanpa Judul"}</h3>
+      <img src="${thumb}" class="thumb">
 
-  try {
-    setStatus("Loading...", "loading");
-    loader.style.display = "block";
+      <div class="download-buttons">
+        <a href="${video}" class="btn-primary" download>
+          <i class="fas fa-video"></i> Download Video
+        </a>
 
-    const apiUrl = `${API_BASE}?url=${encodeURIComponent(rawUrl)}&apikey=${API_KEY}`;
-
-    const res = await fetch(apiUrl);
-
-    if (!res.ok) {
-      showError("Gagal memanggil API!", `${res.status} - ${res.statusText}`);
-      setStatus("Error API", "error");
-      return;
-    }
-
-    const data = await res.json();
-
-    loader.style.display = "none";
-
-    if (!data || !data.result) {
-      const autoUrl = findFirstUrlInObject(data);
-      if (autoUrl) {
-        showVideoLink(autoUrl);
-        return;
-      }
-
-      showError("Tidak ada link unduh ditemukan!");
-      setStatus("Error", "error");
-      return;
-    }
-
-    showVideoLink(data.result.video_no_watermark);
-
-  } catch (err) {
-    loader.style.display = "none";
-    showError("Terjadi kesalahan jaringan!", err.message);
-    setStatus("Gagal", "error");
-  }
-}
-
-/* ===============================
-   EVENT LISTENER
-================================*/
-downloadForm.removeEventListener("submit", handleDownload); // cegah duplikasi
-downloadForm.addEventListener("submit", handleDownload);
-
-setStatus("Menunggu link TikTok...", "idle");
+        <a href="${audio}" class="btn-secondary" download>
+          <i class="fas fa-music"></i> Download Audio
+        </a>
+      </div>
+    </div>
+  `;
+  
+});
