@@ -1,92 +1,140 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title> DIN-TikTok Downloader </title>
-
-  <!-- ICONS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- STYLE -->
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DIN-TikTok Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Style untuk animasi partikel */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Pastikan partikel di belakang konten lain */
+        }
+    </style>
 </head>
-
 <body>
-
-  <!-- HEADER -->
-  <header class="app-header">
-    <div class="container">
-
-      <!-- LOGO PROFIL -->
-      <div class="profile-logo">
-        <img
-          src="https://i.ibb.co.com/7tdvSy1s/IMG-20251129-164442-470.png"
-          alt="Logo Profil TikTok Downloader"
-          loading="lazy"
-        />
-      </div>
-
-      <h1 class="app-title">
-        <i class="fab fa-tiktok"></i> TikTok Downloader
-      </h1>
-      <p class="app-tagline">Unduh video TikTok tanpa watermark dengan cepat & mudah</p>
-    </div>
-  </header>
-
-  <!-- MAIN -->
-  <main class="container app-container">
-    <div class="download-card">
-      <h2 class="card-title">Mulai Unduh</h2>
-
-      <!-- FORM INPUT -->
-      <form id="download-form" class="download-form">
-        <div class="form-group">
-          <label for="url" class="sr-only">Link TikTok</label>
-
-          <div class="input-wrapper">
-            <i class="fas fa-link input-icon"></i>
-            <input id="url" type="url"
-              placeholder="Tempel link TikTok di sini (contoh: https://vt.tiktok.com/...)"
-              required aria-required="true" aria-label="Link TikTok yang akan diunduh" />
-          </div>
+    <div id="particles-js"></div>
+    <header class="app-header">
+        <div class="container">
+            <div class="profile-logo">
+                <img
+                    src="https://i.ibb.co.com/7tdvSy1s/IMG-20251129-164442-470.png"
+                    alt="Logo Profil TikTok Downloader"
+                    loading="lazy"
+                />
+            </div>
+            <h1 class="app-title">
+                <i class="fab fa-tiktok"></i> TikTok Downloader
+            </h1>
+            <p class="app-tagline">Unduh video TikTok tanpa watermark dengan cepat & mudah</p>
         </div>
-
-        <div class="button-group">
-          <button id="btn" type="submit" class="btn-download"
-            aria-label="Klik untuk mulai mengunduh video">
-            <i class="fas fa-download"></i> Unduh Sekarang
-          </button>
+    </header>
+    <main class="container app-container">
+        <div class="download-card">
+            <h2 class="card-title">Mulai Unduh</h2>
+            <form id="download-form" class="download-form">
+                <div class="form-group">
+                    <label for="url" class="sr-only">Link TikTok</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-link input-icon"></i>
+                        <input id="url" type="url" placeholder="Tempel link TikTok di sini (contoh: .)" required aria-required="true" aria-label="Link TikTok yang akan diunduh" />
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button id="btn" type="submit" class="btn-download" aria-label="Klik untuk mulai mengunduh video">
+                        <i class="fas fa-download"></i> Unduh Sekarang
+                    </button>
+                </div>
+            </form>
+            <div class="loader" id="loader" style="display:none;"></div>
+            <div class="status-indicator">
+                <span class="status-icon"><i class="fas fa-clock"></i></span>
+                <span class="status-text" id="statusText">Menunggu link TikTok...</span>
+            </div>
+            <div id="result"></div>
         </div>
-      </form>
-
-      <!-- LOADER -->
-      <div class="loader" id="loader" style="display:none;"></div>
-
-      <!-- STATUS -->
-      <div class="status-indicator">
-        <span class="status-icon"><i class="fas fa-clock"></i></span>
-        <span class="status-text" id="statusText">Menunggu link TikTok...</span>
-      </div>
-
-      <!-- RESULT -->
-      <div id="result"></div>
-
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="app-footer">
-    <div class="container">
-      <p class="footer-text">©DIN-2025</p>
-    </div>
-  </footer>
-
-  <!-- SCRIPT -->
-  <script src="script.js"></script>
-
+    </main>
+    <footer class="app-footer">
+        <div class="container">
+            <p class="footer-text">©DIN-2025</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        /* Konfigurasi Partikel */
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.4,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out'
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>
